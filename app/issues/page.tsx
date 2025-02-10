@@ -1,7 +1,15 @@
 import React from "react";
+import { Button } from "@radix-ui/themes";
+import Link from "next/link";
 
 const IssuesPage = () => {
-  return <div>issuespage</div>;
+  return (
+    <div>
+      <Button>
+        <Link href="issues/new">new issues</Link>
+      </Button>
+    </div>
+  );
 };
- 
+
 export default IssuesPage;
