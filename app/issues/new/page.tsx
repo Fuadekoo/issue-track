@@ -1,6 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { TextField, TextArea, Button, Callout, Text } from "@radix-ui/themes";
+import {
+  TextField,
+  TextArea,
+  Button,
+  Callout,
+  Text,
+  Spinner,
+} from "@radix-ui/themes";
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import { useForm, Controller, set } from "react-hook-form";
@@ -27,13 +34,16 @@ const NewIssuePage = () => {
     resolver: zodResolver(createIssueSchema),
   });
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   console.log(register("title"));
   const action = async (data: IssueForm) => {
     try {
+      setIsSubmitting(true);
       const response = await axios.post("/api/issues", data);
       router.push("/issues");
       console.log(response);
     } catch (error) {
+      setIsSubmitting(false);
       console.error(error);
       setError("unexpected error");
     }
@@ -62,7 +72,9 @@ const NewIssuePage = () => {
         />
         {<ErrorMessage>{errors.description?.message}</ErrorMessage>}
 
-        <Button>submit new issues</Button>
+        <Button disabled={isSubmitting} type="submit">
+          submit new issues {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </div>
   );
