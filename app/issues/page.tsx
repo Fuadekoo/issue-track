@@ -1,11 +1,33 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import { Button, Table } from "@radix-ui/themes";
 import Link from "next/link";
 import { prisma } from "@/prisma/client";
 import IssueStatusBadge from "../components/IssueStatusBadge";
+import delay from "delay";
+import Loading from "../components/Loading";
+import { getIssues } from "@/lib/data/issue";
 
-const IssuesPage = async () => {
-  const issues = await prisma.issue.findMany();
+const IssuesPage = () => {
+  const [issues, setIssues] = useState<
+    { id: number; title: string; status: string; createdAt: Date }[]
+  >([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getIssues();
+      setIssues(data);
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div>
       <div className="mb-5">
@@ -29,13 +51,14 @@ const IssuesPage = async () => {
         <Table.Body>
           {issues.map((issue) => (
             <Table.Row key={issue.id}>
-              <Table.Cell>{issue.title}
+              <Table.Cell>
+                <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
                 <div className="block md:hidden">
-                  <IssueStatusBadge status={issue.status}/>
+                  <IssueStatusBadge status={issue.status} />
                 </div>
               </Table.Cell>
               <Table.Cell className="hidden md:table-cell">
-                 <IssueStatusBadge status={issue.status}/>  
+                <IssueStatusBadge status={issue.status} />
               </Table.Cell>
               <Table.Cell className="hidden md:table-cell">
                 {issue.createdAt.toDateString()}
