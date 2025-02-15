@@ -1,12 +1,8 @@
 "use client";
+import { Link, Loading, IssueStatusBadge ,ErrorMessage} from "@/app/components";
 import React, { useState, useEffect } from "react";
 import { Button, Table } from "@radix-ui/themes";
-import Link from "../components/Link";
-// import Link from "next/link";
 import { prisma } from "@/prisma/client";
-import IssueStatusBadge from "../components/IssueStatusBadge";
-import delay from "delay";
-import Loading from "../components/Loading";
 import { getIssues } from "@/lib/data/issue";
 
 const IssuesPage = () => {
