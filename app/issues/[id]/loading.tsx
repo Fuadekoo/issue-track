@@ -1,4 +1,4 @@
-import { Heading, Flex, Card, Box } from "@radix-ui/themes";
+import { Box, Card, Flex } from "@radix-ui/themes";
 import { Skeleton } from "../../components/index";
 const loading = () => {
   return (

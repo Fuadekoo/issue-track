@@ -1,10 +1,5 @@
 "use client";
-import {
-  Button,
-  Callout,
-  Spinner,
-  TextField
-} from "@radix-ui/themes";
+import { Button, Callout, Spinner, TextField } from "@radix-ui/themes";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 // import SimpleMDE from "react-simplemde-editor";
@@ -27,9 +22,9 @@ type IssueFormData = z.infer<typeof IssueSchema>;
 //   description: string;
 // }
 
-interface Props {
-  issue?: Issue;
-}
+// interface Props {
+//   issue?: Issue;
+// }
 
 const IssueForm = ({ issue }: { issue?: Issue }) => {
   const router = useRouter();
@@ -51,6 +46,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
         await axios.patch("/api/issues/" + issue.id, data);
       } else await axios.post("/api/issues", data);
       router.push("/issues");
+      router.refresh();
     } catch (error) {
       setIsSubmitting(false);
       console.error(error);
