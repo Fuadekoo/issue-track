@@ -15,7 +15,7 @@ import { useForm, Controller, set } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createIssueSchema } from "../../validationSchema";
+import { IssueSchema } from "../../validationSchema";
 import { z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import { Issue } from "@prisma/client";
@@ -23,7 +23,7 @@ import { Issue } from "@prisma/client";
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 });
-type IssueFormData = z.infer<typeof createIssueSchema>;
+type IssueFormData = z.infer<typeof IssueSchema>;
 // interface IssueForm {
 //   title: string;
 //   description: string;
@@ -41,7 +41,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
     handleSubmit,
     formState: { errors },
   } = useForm<IssueFormData>({
-    resolver: zodResolver(createIssueSchema),
+    resolver: zodResolver(IssueSchema),
   });
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
