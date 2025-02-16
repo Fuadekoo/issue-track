@@ -1,9 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import classNames from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AiFillBug } from "react-icons/ai";
-import classNames from "classnames";
 const Navbar = () => {
   const currentPath = usePathname();
   // console.log(currentPath);
