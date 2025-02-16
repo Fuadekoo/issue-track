@@ -9,7 +9,7 @@ const EditIssueButton = ({ issueId }: { issueId: number }) => {
       <Pencil2Icon />
       <Link href={`/issues/${issueId}/edit`}>Edit issue</Link>
     </Button>
-  );
+  ); 
 };
 
 export default EditIssueButton;

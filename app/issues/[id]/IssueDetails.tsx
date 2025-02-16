@@ -1,11 +1,9 @@
-import React from "react";
-import { Box, Button, Card, Flex, Grid, Heading, Text } from "@radix-ui/themes";
 import { IssueStatusBadge } from "@/app/components";
+import { Issue } from "@prisma/client";
+import { Box, Card, Flex, Heading, Text } from "@radix-ui/themes";
 import ReactMarkdown from "react-markdown";
-import { Pencil2Icon } from "@radix-ui/react-icons";
-import Link from "next/link";
-
-const IssueDetails = () => {
+import EditIssueButton from "./edit/EditIssueButton";
+const IssueDetails = ({issue}:{issue:Issue}) => {
   return (
     <>
       <Box>
