@@ -3,19 +3,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./theme-config.css";
 // import { Geist, Geist_Mono } from "next/font/google";
-import { Theme } from "@radix-ui/themes";
+import { Container, Theme } from "@radix-ui/themes";
 import "./globals.css";
 import Navbar from "./Navbar";
-
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
 
 const inter = Inter({
   subsets: ["latin"],
@@ -37,7 +27,9 @@ export default function RootLayout({
       <body className={inter.variable}>
         <Theme accentColor="tomato" radius="large">
           <Navbar />
-          <main className="p-5">{children}</main>
+          <main className="p-5"><Container>
+            {children}
+            </Container></main>
         </Theme>
       </body>
     </html>
